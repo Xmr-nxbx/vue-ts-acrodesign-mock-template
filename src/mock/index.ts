@@ -1,10 +1,16 @@
 import Mock from "mockjs";
 
+/**
+ * 请求类型
+ */
 export enum RType {
   GET = "get",
   POST = "post",
 }
 
+/**
+ * 状态码
+ */
 export enum HttpCode {
   SUCCESS = 200,
   AUTH_ERROR = 401,
@@ -14,19 +20,6 @@ export enum HttpCode {
 }
 
 const baseURL = import.meta.env.VITE_API_BASEURL;
-
-// const data = Mock.mock({
-//   "list|1-10": [
-//     {
-//       "id|+1": 1, // 从 1 开始，每次加 1
-//       name: "@cname", // 随机中文名字
-//       "age|18-60": 1, // 18 到 60 岁之间的整数
-//       "gender|1": ["男", "女"], // 男或女
-//       email: "@email", // 随机电子邮件地址
-//     },
-//   ],
-// });
-// console.log(data);
 
 function formateRurl(rurl: string | RegExp) {
   if (typeof rurl === "string") {
@@ -40,7 +33,12 @@ function formateRurl(rurl: string | RegExp) {
   return rurl;
 }
 
-// 包装请求成功
+/**
+ * 在mock.ts中定义成功请求的规则
+ * @param rurl string: 请求地址
+ * @param rtype string: 请求类型
+ * @param rtemplate Object | () => Object: 请求模板
+ */
 export function mockSuccessWrapper(
   rurl: string | RegExp,
   rtype: string,
@@ -57,8 +55,15 @@ export function mockSuccessWrapper(
   });
 }
 
-// 包装请求失败
-export function mockFailWrapper(
+
+/**
+ * 在mock.ts中定失败请求的规则
+ * @param rurl string: 请求地址
+ * @param rtype string: 请求类型
+ * @param rtemplate Object | () => Object: 请求模板
+ * @param code HttpCode: 请求状态码
+ * @param message string: 请求失败message
+ */export function mockFailWrapper(
   rurl: string | RegExp,
   rtype: string,
   rtemplate: Object | Function | undefined,
@@ -84,3 +89,17 @@ export function mockRequest() {
     module();
   })
 }
+
+
+// const data = Mock.mock({
+//   "list|1-10": [
+//     {
+//       "id|+1": 1, // 从 1 开始，每次加 1
+//       name: "@cname", // 随机中文名字
+//       "age|18-60": 1, // 18 到 60 岁之间的整数
+//       "gender|1": ["男", "女"], // 男或女
+//       email: "@email", // 随机电子邮件地址
+//     },
+//   ],
+// });
+// console.log(data);
