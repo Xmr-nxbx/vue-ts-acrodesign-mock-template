@@ -1,4 +1,4 @@
-# my-vue-template 
+# vue-ts-acrodesign-mock-template
 
 一个基于vue3+typescript+vite的模板，用于快速创建vue3项目，并集成vue-router、vuex、axios等常用插件，方便开发。
 
